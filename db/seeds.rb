@@ -10,6 +10,12 @@ List.destroy_all
 Board.destroy_all
 
 board1 = Board.create(title: 'Board 1');
-board2 = Board.create(title: 'Board 2');
+#board2 = Board.create(title: 'Board 2');
 list1 = List.create({title: 'list 1', board: board1})
+list2 = List.create({title: 'list 2', board: board1})
+
 card1 = Card.create(title: 'card', list: list1, labels: ['red', 'blue'])
+card2 = Card.create(title: 'card', list: list1, labels: ['red', 'blue'])
+card3 = Card.create(title: 'card', list: list2, labels: ['red', 'blue'])
+card4 = Card.create(title: 'card', list: list2, labels: ['red', 'blue'])
+card5 = Card.create(title: 'card', list: list2, labels: ['red', 'blue'])

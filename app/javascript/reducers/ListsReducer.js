@@ -8,7 +8,9 @@ export default function listsReducer(state = [], action) {
       return listWithoutCards;
     });
     
-    return state.concat(listsWithoutCards);
+    let filteredLists = state.filter( list => list.board_id !== action.board.id);
+    
+    return filteredLists.concat(listsWithoutCards);
   } else {
     return state;
   }

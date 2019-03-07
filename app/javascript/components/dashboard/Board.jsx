@@ -30,7 +30,14 @@ const Board = props => {
       <div className="subscribed">
         <i className="sub-icon sm-icon"></i>Subscribed</div>
     </header>
-    {lists}
+    <main className="dashboard">
+      <div id="list-container" className="list-container">
+        <div id="existing-lists" className="existing-lists">
+          {lists}
+        </div>
+      </div>
+    </main>
+
   </div>);
 }
 

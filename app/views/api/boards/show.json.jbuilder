@@ -11,5 +11,6 @@ json.lists(@board.lists) do |list|
     json.labels card.labels
     json.due_date card.due_date
     json.list_id card.list_id
+    json.board_id card.board_id
   end
 end

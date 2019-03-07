@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import CardsContainer from './CardsContainer';
 import ListContainer from './ListContainer';
+import CreateListTileContainer from './CreateListTileContainer';
 
 const Board = props => {
   const cardsFilter = (id) => {
@@ -35,12 +36,7 @@ const Board = props => {
         <div id="existing-lists" className="existing-lists">
           {lists}
         </div>
-        <div id="new-list" className="new-list"><span>Add a list...</span>
-            <input type="text" placeholder="Add a list..." />
-            <div>
-                <input type="submit" className="button" value="Save" /><i className="x-icon icon"></i>
-            </div>
-        </div>
+        <CreateListTileContainer />
       </div>
 
     </main>

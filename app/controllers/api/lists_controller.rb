@@ -9,6 +9,9 @@ class Api::ListsController < ApplicationController
       @error = @list.errors.full_messages.join(', ')
       render 'api/shared/error', status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordNotFound
+    @error = "Invalid board id provided"
+    render 'api/shared/error', status: 404
   end
 
   private

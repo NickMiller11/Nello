@@ -14,6 +14,21 @@ class Api::ListsController < ApplicationController
     render 'api/shared/error', status: 404
   end
 
+  def update
+    @list = List.find(params[:id])
+
+    if @list.update(list_params)
+      render :update
+    else
+      @error = @list.errors.full_messages.join(', ')
+      render 'api/shared/error', status: :unprocessable_entity
+    end
+  rescue ActiveRecord::RecordNotFound
+    @error = "Invalid board id provided"
+    render 'api/shared/error', status: 404
+  end
+
+
   private
 
   def list_params

@@ -1,15 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import * as actions from '../../actions/BoardActions';
+
+
 
 class ChangableTitle extends React.Component {
-
   state = {
     title: this.props.title
   }
 
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   handleBlur = (evt) => {
     const newTitle = evt.target.value;
     this.context.store.dispatch(actions.updateListTitle(this.props.id, newTitle,
-      this.props.returnToParagraph()));
+      this.props.returnToParagraph));
   }
 
   updateTitle = (evt) => {
@@ -24,8 +31,6 @@ class ChangableTitle extends React.Component {
         onChange={this.updateTitle}
         onBlur={this.handleBlur}
       ></input>
-
-
     )
   };
 }

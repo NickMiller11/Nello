@@ -34,7 +34,6 @@ const apiClient = {
     return axios.put(`/api/lists/${listId}`,
     {
       title,
-      "position": null
     })
     .then(unwrapData)
     .then(callback)

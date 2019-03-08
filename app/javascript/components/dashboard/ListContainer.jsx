@@ -3,10 +3,9 @@ import CardsContainer from './CardsContainer';
 import ChangableTitle from './ChangableTitle';
 
 class ListContainer extends React.Component {
-
   state = {
     editableTitle: false,
-  };
+  }
 
   showInput = () => {
     this.setState({ editableTitle: true });

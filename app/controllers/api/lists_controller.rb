@@ -24,7 +24,7 @@ class Api::ListsController < ApplicationController
       render 'api/shared/error', status: :unprocessable_entity
     end
   rescue ActiveRecord::RecordNotFound
-    @error = "Invalid board id provided"
+    @error = "Invalid list id provided"
     render 'api/shared/error', status: 404
   end
 
@@ -32,6 +32,6 @@ class Api::ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:title)
+    params.require(:list).permit(:title, :position)
   end
 end

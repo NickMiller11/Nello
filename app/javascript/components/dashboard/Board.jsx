@@ -2,16 +2,17 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import CardsContainer from './CardsContainer';
 import ListContainer from './ListContainer';
+import CreateListTileContainer from './CreateListTileContainer';
 
 const Board = props => {
   const cardsFilter = (id) => {
-    return props.cards.filter((set) => {
-      return set[0].list_id === id;
+    return props.cards.filter((card) => {
+      return card.list_id === id;
     });
   }
 
   let lists = props.lists.map((list) => <ListContainer
-    cards={cardsFilter(list.id)[0]}
+    cards={cardsFilter(list.id)}
     id={list.id}
     boardId={list.board_id}
     title={list.title}
@@ -30,7 +31,15 @@ const Board = props => {
       <div className="subscribed">
         <i className="sub-icon sm-icon"></i>Subscribed</div>
     </header>
-    {lists}
+    <main>
+      <div id="list-container" className="list-container">
+        <div id="existing-lists" className="existing-lists">
+          {lists}
+        </div>
+        <CreateListTileContainer boardId={props.board.id}/> 
+      </div>
+
+    </main>
   </div>);
 }
 

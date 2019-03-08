@@ -3,12 +3,12 @@ export default function cardsReducer(state = [], action) {
     const excludedBoards = state.filter(board => board.id !== action.board.id);
     const { lists, ...newBoardWithoutLists } = action.board;
 
-    let listCards = lists.map((list) => {
+    let listCards = lists.reduce((acc, list) => {
       const { cards, ...listWithoutCards } = list;
-      return cards;
-    });
+      return acc.concat(cards);
+    }, []);
 
-    return state.concat(listCards);
+    return state.filter(card => card.board_id !== action.board.id).concat(listCards);
   } else {
     return state;
   }

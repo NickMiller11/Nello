@@ -7,10 +7,12 @@ export default function listsReducer(state = [], action) {
       const { cards, ...listWithoutCards } = list;
       return listWithoutCards;
     });
-    
+
     let filteredLists = state.filter( list => list.board_id !== action.board.id);
-    
+
     return filteredLists.concat(listsWithoutCards);
+  } else if (action.type === 'CREATE_LIST_SUCCESS') {
+      return state.concat(action.list);
   } else {
     return state;
   }

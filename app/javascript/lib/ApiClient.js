@@ -19,6 +19,16 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['Accept'] = 'application/json';
 
 const apiClient = {
+  createList: function(boardId, list, callback) {
+    return axios.post('/api/lists',
+      {
+        board_id: boardId,
+        list
+      })
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError);
+  },
   getBoards: function(callback) {
     return axios.get(routes.BOARDS_INDEX_URL)
       .then(unwrapData)

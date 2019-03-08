@@ -29,6 +29,18 @@ const apiClient = {
       .then(callback)
       .catch(logError);
   },
+
+  updateList: function(listId, title, callback) {
+    return axios.put(`/api/lists/${listId}`,
+    {
+      title,
+      "position": null
+    })
+    .then(unwrapData)
+    .then(callback)
+    .catch(logError);
+  },
+  
   getBoards: function(callback) {
     return axios.get(routes.BOARDS_INDEX_URL)
       .then(unwrapData)

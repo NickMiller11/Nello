@@ -10,12 +10,13 @@ import { fetchBoards } from '../actions/BoardActions';
 
 class Application extends React.Component {
   static contextTypes = {
-    store: PropTypes.object
+    store: PropTypes.object,
   }
 
   componentDidMount() {
     const store = this.context.store;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
+    // console.log(this.context);
   }
 
   componentWillUnmount() {

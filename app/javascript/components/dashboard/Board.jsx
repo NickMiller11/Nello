@@ -36,7 +36,7 @@ const Board = props => {
         <div id="existing-lists" className="existing-lists">
           {lists}
         </div>
-        <CreateListTileContainer boardId={props.id}/> 
+        <CreateListTileContainer boardId={props.board.id}/> 
       </div>
 
     </main>

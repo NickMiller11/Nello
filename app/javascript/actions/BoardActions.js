@@ -1,9 +1,9 @@
 import apiClient from '../lib/ApiClient';
-// import all, object types 
+// import all, object types
 import * as types from '../constants/ActionTypes';
 
 export function createListSuccess(list) {
-	return { type: types.CREATE_LIST_SUCCESS, list: list};
+	return { type: types.CREATE_LIST_SUCCESS, list: list };
 }
 
 export function fetchBoardsRequest() {
@@ -28,6 +28,15 @@ export function createBoardRequest() {
 
 export function createBoardSuccess(board) {
   return { type: types.CREATE_BOARD_SUCCESS, board: board };
+}
+
+export function createList(boardId, list, callback) {
+	return function(dispatch) {
+		apiClient.createList(boardId, list, (listJson) => {
+			dispatch(createListSuccess(listJson));
+			callback();
+		});
+	}
 }
 
 export function fetchBoards() {

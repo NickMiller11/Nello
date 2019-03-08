@@ -9,7 +9,7 @@ class CreateListTileContainer extends React.Component {
     isOpen: false,
 		title: '',
   };
- 
+
  	static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -27,11 +27,15 @@ class CreateListTileContainer extends React.Component {
   handleSubmit = (evt) => {
   	evt.preventDefault();
   	evt.stopPropagation();
-  	
+
   	const store = this.context.store;
-  	const boardId = Number(this.props.boardId);
-  	console.log(boardId);
-  	// store.dispatch(actions.createListSuccess( { title: this.state.title, board_id:  }))
+  	const boardId = this.props.boardId;
+  	//console.log(boardId);
+    // dispatch is async
+  	store.dispatch(actions.createList( boardId, { title: this.state.title }, () => {
+      this.setState({ isOpen: false, title: '' });
+    }));
+
 
   	// dispatch list action to store
   	// list action is create list
@@ -51,7 +55,7 @@ class CreateListTileContainer extends React.Component {
   }
 
   render() {
-    return (	
+    return (
       <CreateListTile
       	formOpen={this.state.isOpen}
         onOpenClick={this.handleOpenClick}

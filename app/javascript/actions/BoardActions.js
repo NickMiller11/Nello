@@ -6,6 +6,10 @@ export function createListSuccess(list) {
 	return { type: types.CREATE_LIST_SUCCESS, list: list };
 }
 
+export function updateListSuccess(list) {
+	return { type: types.UPDATE_LIST_SUCCESS, list: list };
+}
+
 export function fetchBoardsRequest() {
   return { type: types.FETCH_BOARDS_REQUEST };
 }
@@ -28,6 +32,15 @@ export function createBoardRequest() {
 
 export function createBoardSuccess(board) {
   return { type: types.CREATE_BOARD_SUCCESS, board: board };
+}
+
+export function updateListTitle(listId, title, callback) {
+	return function(dispatch) {
+		apiClient.updateList(listId, title, (listJson) => {
+			dispatch(updateListSuccess(listJson));
+			callback();
+		});
+	}
 }
 
 export function createList(boardId, list, callback) {

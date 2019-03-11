@@ -1,7 +1,19 @@
 import React from 'react';
 import CardsContainer from './CardsContainer';
+import ChangableTitle from './ChangableTitle';
 
 class ListContainer extends React.Component {
+  state = {
+    editableTitle: false,
+  }
+
+  showInput = () => {
+    this.setState({ editableTitle: true });
+  }
+
+  returnToParagraph = () => {
+    this.setState({ editableTitle: false });
+  }
 
   render() {
     let cards = this.props.cards.map((card) => <CardsContainer
@@ -17,7 +29,14 @@ class ListContainer extends React.Component {
               <div className="list">
                   <a className="more-icon sm-icon" href=""></a>
                   <div>
-                      <p className="list-title">{this.props.title}</p>
+                    {this.state.editableTitle ?
+                      (<ChangableTitle
+                        id={this.props.id}
+                        title={this.props.title}
+                        returnToParagraph={this.returnToParagraph}
+                      />) :
+                      (<p onClick={this.showInput} className="list-title">{this.props.title}</p>)
+                    }
                   </div>
                   <div className="add-dropdown add-top">
                       <div className="card"></div><a className="button">Add</a><i className="x-icon icon"></i>

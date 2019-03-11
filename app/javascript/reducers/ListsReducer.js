@@ -13,6 +13,9 @@ export default function listsReducer(state = [], action) {
     return filteredLists.concat(listsWithoutCards);
   } else if (action.type === 'CREATE_LIST_SUCCESS') {
       return state.concat(action.list);
+  } else if (action.type === 'UPDATE_LIST_SUCCESS') {
+      let filteredLists = state.filter( list => list.id !== action.list.id);
+      return filteredLists.concat(action.list);
   } else {
     return state;
   }

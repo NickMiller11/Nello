@@ -5,20 +5,6 @@ import ListContainer from './ListContainer';
 import CreateListTileContainer from './CreateListTileContainer';
 
 const Board = props => {
-  const cardsFilter = (id) => {
-    return props.cards.filter((card) => {
-      return card.list_id === id;
-    });
-  }
-
-  let lists = props.lists.map((list) => <ListContainer
-    cards={cardsFilter(list.id)}
-    id={list.id}
-    boardId={list.board_id}
-    title={list.title}
-  />);
-
-
   return (<div>
     <header>
       <ul>
@@ -34,7 +20,7 @@ const Board = props => {
     <main>
       <div id="list-container" className="list-container">
         <div id="existing-lists" className="existing-lists">
-          {lists}
+          {this.props.lists}
         </div>
         <CreateListTileContainer boardId={props.board.id}/> 
       </div>

@@ -18,6 +18,7 @@ class ListContainer extends React.Component {
 
   render() {
     let cards = this.props.cards.map((card) => <CardsContainer
+      listId={this.props.id}
       id={card.id}
       title={card.title}
       description={card.description}
@@ -25,7 +26,7 @@ class ListContainer extends React.Component {
     />);
 
     return (
-      <div className="list-wrapper">
+      <div className={this.props.classes}>
           <div className="list-background">
               <div className="list">
                   <a className="more-icon sm-icon" href=""></a>
@@ -45,7 +46,10 @@ class ListContainer extends React.Component {
                       </div>
                   </div>
                   {cards}
-                  <CreateCardTileContainer />
+                  <CreateCardTileContainer
+                    handleSetActiveList={this.props.handleSetActiveList}
+                    listId={this.props.id}
+                  />
               </div>
           </div>
       </div>

@@ -20,9 +20,9 @@ const Board = props => {
     <main>
       <div id="list-container" className="list-container">
         <div id="existing-lists" className="existing-lists">
-          {this.props.lists}
+          {props.lists}
         </div>
-        <CreateListTileContainer boardId={props.board.id}/> 
+        <CreateListTileContainer boardId={props.board.id}/>
       </div>
 
     </main>

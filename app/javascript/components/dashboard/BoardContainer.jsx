@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Board from './Board';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions/BoardActions';
+import ListContainer from './ListContainer';
 
 
 class BoardContainer extends React.Component {
@@ -25,22 +26,13 @@ class BoardContainer extends React.Component {
     store: PropTypes.object.isRequired
   };
 
-  const cardsFilter = (id) => {
-    return props.cards.filter((card) => {
+  cardsFilter(id, cards) {
+    return cards.filter((card) => {
       return card.list_id === id;
     });
   }
 
-  let lists = store.getState().lists.map((list) => <ListContainer
-  	handleCreateCard={this.props.handleCreateCard}
-    cards={cardsFilter(list.id)}
-    id={list.id}
-    boardId={list.board_id}
-    title={list.title}
-    classes=(this.getState().activeListId === list.id ? 'list-wrapper add-dropdown-active' : 'list-wrapper')
-  />);
-
-  handleAddDropdownClassToList = (list_id) => {
+  handleAddDropdownClassToList = (list_id=null) => {
   	this.setState({ activeListId: list_id })
   }
 
@@ -49,11 +41,22 @@ class BoardContainer extends React.Component {
     let boardId = Number(this.props.match.params.id);
     let board = store.getState().boards.find((board) => board.id === boardId);
     let cards = store.getState().cards;
+
+		let lists = store.getState().lists.map((list) =>
+			<ListContainer
+		  	handleSetActiveList={this.handleAddDropdownClassToList}
+		    cards={this.cardsFilter(list.id, cards)}
+		    id={list.id}
+		    boardId={list.board_id}
+		    title={list.title}
+		    classes={this.state.activeListId === list.id ? 'list-wrapper add-dropdown-active' : 'list-wrapper'}
+			/>)
+
     return (
       <div>
         <Board
           board={board}
-          lists={this.lists}
+          lists={lists}
           cards={cards}
         />
       </div>

@@ -9,6 +9,8 @@ export default function cardsReducer(state = [], action) {
     }, []);
 
     return state.filter(card => card.board_id !== action.board.id).concat(listCards);
+  } else if (action.type === 'CREATE_CARD_SUCCESS') {
+    return state.concat(action.card);
   } else {
     return state;
   }

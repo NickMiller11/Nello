@@ -34,10 +34,23 @@ export function createBoardSuccess(board) {
   return { type: types.CREATE_BOARD_SUCCESS, board: board };
 }
 
+export function createCardSuccess(card) {
+	return { type: types.CREATE_CARD_SUCCESS, card: card };
+}
+
 export function updateListTitle(listId, title, callback) {
 	return function(dispatch) {
 		apiClient.updateList(listId, title, (listJson) => {
 			dispatch(updateListSuccess(listJson));
+			callback();
+		});
+	}
+}
+
+export function createCard(listId, card, callback) {
+	return function(dispatch) {
+		apiClient.createCard(listId, card, (cardJson) => {
+			dispatch(createCardSuccess(cardJson));
 			callback();
 		});
 	}

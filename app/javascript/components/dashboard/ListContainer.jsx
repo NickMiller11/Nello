@@ -18,6 +18,7 @@ class ListContainer extends React.Component {
 
   render() {
     let cards = this.props.cards.map((card) => <CardsContainer
+      handleCardModal={this.props.handleCardModal}
       listId={this.props.id}
       id={card.id}
       title={card.title}

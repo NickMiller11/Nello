@@ -4,11 +4,17 @@ import Board from './Board';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions/BoardActions';
 import ListContainer from './ListContainer';
+import ModalCard from './ModalCard';
 
 
 class BoardContainer extends React.Component {
 	state = {
 		activeListId: null,
+		cardModal: false
+	}
+
+	handleCardModal = () => {
+		this.setState({ cardModal: true });
 	}
 
   componentDidMount() {
@@ -45,6 +51,7 @@ class BoardContainer extends React.Component {
 		let lists = store.getState().lists.map((list) =>
 			<ListContainer
 		  	handleSetActiveList={this.handleAddDropdownClassToList}
+				handleCardModal={this.handleCardModal}
 		    cards={this.cardsFilter(list.id, cards)}
 		    id={list.id}
 		    boardId={list.board_id}
@@ -59,6 +66,7 @@ class BoardContainer extends React.Component {
           lists={lists}
           cards={cards}
         />
+			{this.state.cardModal ? <ModalCard/> : ''}
       </div>
     );
   }

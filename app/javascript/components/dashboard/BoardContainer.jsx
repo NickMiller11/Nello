@@ -6,7 +6,6 @@ import * as actions from '../../actions/BoardActions';
 import ListContainer from './ListContainer';
 import ModalCard from './ModalCard';
 
-
 class BoardContainer extends React.Component {
 	state = {
 		activeListId: null,
@@ -46,6 +45,7 @@ class BoardContainer extends React.Component {
     let store = this.context.store;
     let boardId = Number(this.props.match.params.id);
     let board = store.getState().boards.find((board) => board.id === boardId);
+
     let cards = store.getState().cards;
 
 		let lists = store.getState().lists.map((list) =>
@@ -59,16 +59,21 @@ class BoardContainer extends React.Component {
 		    classes={this.state.activeListId === list.id ? 'list-wrapper add-dropdown-active' : 'list-wrapper'}
 			/>)
 
-    return (
-      <div>
-        <Board
-          board={board}
-          lists={lists}
-          cards={cards}
-        />
-			{this.state.cardModal ? <ModalCard/> : ''}
-      </div>
-    );
+		if (board) {
+			return (
+	      <div>
+	        <Board
+	          board={board}
+	          lists={lists}
+	          cards={cards}
+	        />
+				{this.state.cardModal ? <ModalCard /> : ''}
+	      </div>
+	    );
+		} else {
+			return null;
+		}
+
   }
 }
 

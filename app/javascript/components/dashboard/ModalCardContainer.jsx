@@ -22,7 +22,8 @@ class ModalCardContainer extends React.Component {
     let store = this.context.store.getState();
     let card = store.cards.find((card) => {
       return card.id === Number(this.props.match.params.id);
-    })
+    });
+    
     return (
       <ModalCard
         card={card}

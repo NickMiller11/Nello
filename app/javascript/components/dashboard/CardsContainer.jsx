@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import { Link } from 'react-router-dom';
 
 class CardsContainer extends React.Component {
 
@@ -9,12 +10,16 @@ class CardsContainer extends React.Component {
 
   render() {
       return (
-        <div id="cards-container" data-id="list-1-cards">
-          <Card
-            handleCardModal={this.props.handleCardModal}
-            openCard={this.handleOpenCard}
-          />
-        </div>
+
+          <div id="cards-container" data-id="list-1-cards">
+            <Link to={`/cards/${this.props.id}`}>
+              <Card
+                handleCardModal={this.props.handleCardModal}
+                openCard={this.handleOpenCard}
+              />
+            </Link>
+          </div>
+
       );
   }
 }

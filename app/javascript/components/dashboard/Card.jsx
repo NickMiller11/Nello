@@ -1,13 +1,9 @@
 import React from 'react';
 
 class Card extends React.Component {
-  displayModal = (evt) => {
-    evt.stopPropagation();
-    this.props.handleCardModal();
-  }
   render() {
     return (
-      <div onClick={this.displayModal} className="card-background">
+      <div className="card-background">
           <div className="card "><i className="edit-toggle edit-icon sm-icon"></i>
               <div className="card-info">
                   <div className="card-label green colorblindable">

@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const ModalCard = (props) => {
-
+  console.log(props);
   return (
     <div id="modal-container">
       <div className="screen"></div>
@@ -10,7 +9,9 @@ const ModalCard = (props) => {
         <i className="x-icon icon close-modal"></i>
         <header>
           <i className="card-icon icon .close-modal"></i>
-          <textarea className="list-title" style={{height:'45px'}}>Cards do many cool things. Click on this card to open it and learn more...</textarea>
+          <textarea className="list-title" style={{height:'45px'}}>
+            {props.card.title}
+          </textarea>
           <p>in list <a className="link">Stuff to try (this is a list)</a><i className="sub-icon sm-icon"></i>
           </p>
         </header>
@@ -44,13 +45,13 @@ const ModalCard = (props) => {
                 <li className="due-date-section">
                   <h3>Due Date</h3>
                   <div id="dueDateDisplay" className="overdue completed">
-                    <input id="dueDateCheckbox" type="checkbox" className="checkbox" checked="" />Aug 4 at 10:42 AM <span>(past due)</span>
+                    <input id="dueDateCheckbox" type="checkbox" className="checkbox" checked="" />{props.card.due_date}<span>(past due)</span>
                   </div>
                 </li>
               </ul>
               <form className="description">
                 <p>Description</p>
-                <textarea className="textarea-toggle" rows="1" autofocus>Cards have a symbol to indicate if they contain a description.</textarea>
+                <textarea className="textarea-toggle" rows="1" autoFocus>{props.card.description}</textarea>
                 <div>
                   <div className="button" value="Save">Save</div>
                   <i className="x-icon icon"></i>

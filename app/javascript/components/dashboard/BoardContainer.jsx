@@ -17,10 +17,9 @@ class BoardContainer extends React.Component {
 	}
 
   componentDidMount() {
-    let boardId = Number(this.props.match.params.id);
-    const store = this.context.store;
+		const store = this.context.store;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
-    store.dispatch(actions.fetchBoard(boardId));
+    store.dispatch(actions.fetchBoard(this.getBoardId()));
   }
 
   componentWillUnmount() {
@@ -41,11 +40,24 @@ class BoardContainer extends React.Component {
   	this.setState({ activeListId: list_id })
   }
 
+	getBoardId = () => {
+		let boardId;
+		const store = this.context.store;
+    let id = Number(this.props.match.params.id);
+		let url = this.props.match.url
+		if (url.match(/cards/)) {
+			boardId = store.getState().cards.find((card) => (card.id === id)).board_id;
+		} else {
+			boardId = id;
+		}
+
+		return boardId;
+	}
+
   render() {
     let store = this.context.store;
-    let boardId = Number(this.props.match.params.id);
+		let boardId = this.getBoardId();
     let board = store.getState().boards.find((board) => board.id === boardId);
-
     let cards = store.getState().cards;
 
 		let lists = store.getState().lists.map((list) =>

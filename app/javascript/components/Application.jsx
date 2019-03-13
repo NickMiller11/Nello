@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import BoardContainer from './dashboard/BoardContainer';
+import CardsContainer from './dashboard/CardsContainer';
+import ModalCardContainer from './dashboard/ModalCardContainer';
 
 import TopNav from './shared/TopNav';
 import BoardsDashboardContainer from './dashboard/BoardsDashboardContainer';
@@ -29,9 +31,10 @@ class Application extends React.Component {
     return (
       <div>
         <TopNav />
-        <Route path='/' exact component={BoardsDashboardContainer} />
-        <Route path='/boards/:id' exact component={BoardContainer} />
+        <Route path='/(boards|cards)/:id' exact component={BoardContainer} />
+        <Route path='/cards/:id' exact component={ModalCardContainer} />
 
+        <Route path='/' exact component={BoardsDashboardContainer} />
       </div>
     );
   }

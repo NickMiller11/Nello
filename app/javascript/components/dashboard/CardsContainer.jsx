@@ -1,30 +1,28 @@
 import React from 'react';
+import Card from './Card';
+import { Link } from 'react-router-dom';
 
 class CardsContainer extends React.Component {
 
+//  componentDidMount() {
+//    // subscribe, get card, refresh view
+//  }
+
   render() {
-    return (
-      <div id="cards-container" data-id="list-1-cards">
-          <div className="card-background">
-              <div className="card "><i className="edit-toggle edit-icon sm-icon"></i>
-                  <div className="card-info">
-                      <div className="card-label green colorblindable">
-                      </div><div className="card-label yellow colorblindable">
-                      </div><div className="card-label red colorblindable">
-                      </div><div className="card-label orange colorblindable">
-                      </div><div className="card-label blue colorblindable">
-                      </div><div className="card-label purple colorblindable">
-                      </div>
-                      <p>{this.props.title}</p>
-                  </div>
-                  <div className="card-icons"><i className="clock-icon sm-icon overdue-recent completed">Aug 4</i><i className="description-icon sm-icon"></i><i className="comment-icon sm-icon"></i>
-                  </div>
-              </div>
+      return (
+
+          <div id="cards-container" data-id="list-1-cards">
+            <Link to={`/cards/${this.props.id}`}>
+              <Card
+                handleCardModal={this.props.handleCardModal}
+                openCard={this.handleOpenCard}
+              />
+            </Link>
           </div>
 
-      </div>
-    );
+      );
   }
 }
+
 
 export default CardsContainer;

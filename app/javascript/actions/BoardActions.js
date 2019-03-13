@@ -34,10 +34,27 @@ export function createBoardSuccess(board) {
   return { type: types.CREATE_BOARD_SUCCESS, board: board };
 }
 
+export function createCardSuccess(card) {
+	return { type: types.CREATE_CARD_SUCCESS, card: card };
+}
+
+export function fetchCardSuccess(card) {
+  return { type: types.FETCH_CARD_SUCCESS, card };
+}
+
 export function updateListTitle(listId, title, callback) {
 	return function(dispatch) {
 		apiClient.updateList(listId, title, (listJson) => {
 			dispatch(updateListSuccess(listJson));
+			callback();
+		});
+	}
+}
+
+export function createCard(listId, card, callback) {
+	return function(dispatch) {
+		apiClient.createCard(listId, card, (cardJson) => {
+			dispatch(createCardSuccess(cardJson));
 			callback();
 		});
 	}
@@ -65,6 +82,14 @@ export function fetchBoard(id) {
     apiClient.getBoard(id, board => dispatch(fetchBoardSuccess(board)));
   };
 }
+
+export function fetchCard(id) {
+  return function(dispatch) {
+    //dispatch(fetchBoardRequest());
+    apiClient.getCard(id, card => dispatch(fetchCardSuccess(card)));
+  };
+}
+
 
 
 export function createBoard(board, callback) {
